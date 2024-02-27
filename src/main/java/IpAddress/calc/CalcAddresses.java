@@ -12,7 +12,7 @@ public class CalcAddresses {
 
     // constant
     public CalcAddresses(Cidr cidr){
-        nativeAddress = new IpAddress(cidr.getIpaddress());
+        nativeAddress = cidr.getIpaddress();
 
         // make calc
         IpAddressCalc networkCalc = IpAddressCalcFactory.create(nativeAddress,cidr.getPrefix(), Kind.NETWORK);

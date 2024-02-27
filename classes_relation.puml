@@ -1,0 +1,96 @@
+@startuml
+class IpAddress.Cidr {
+- String ipaddress
+- PrefixInOctet prefixInOctet
++ String getIpaddress()
++ PrefixInOctet getPrefix()
+}
+
+
+abstract class IpAddress.calc.IpAddressCalc {
+# PrefixInOctet prefixInOctet
+# int hostCount
+# int targetOctetIndex
+# int octetValue
+# int networkValueInOctet
+- int convertHostCount(int)
+# {abstract}IpAddress calc(IpAddress)
+}
+
+
+class IpAddress.IpAddress {
+- List<Integer> octets
++ void setOctet(int,int)
++ int getOctet(int)
++ void setRightAll(int,int)
++ String toString()
++ IpAddress clone()
+}
+
+
+class IpAddress.calc.IpAddressCalcFactory {
++ {static} IpAddressCalc create(IpAddress,PrefixInOctet,Kind)
+}
+
+enum IpAddress.Kind {
++  NETWORK
++  BROADCAST
+- int value
++ int getValue()
+}
+
+
+class Main.Main {
++ {static} void main(String[])
+}
+
+class IpAddress.calc.CalcAddresses {
+- IpAddress nativeAddress
+- IpAddress networkAddress
+- IpAddress broadAddress
++ IpAddress getNativeAddress()
++ IpAddress getNetworkAddress()
++ IpAddress getBroadAddress()
+}
+
+
+class IpAddress.calc.BroadcastIpAddressCalc {
+~ Kind kind
+# IpAddress calc(IpAddress)
+}
+
+
+class IpAddress.PrefixInOctet {
+- int prefixful
+- int prefix
+- int index
++ int getPrefixful()
++ int getPrefix()
++ int getIndex()
+}
+
+
+class IpAddress.calc.NetworkIpAddressCalc {
+~ Kind kind
+# IpAddress calc(IpAddress)
+}
+
+
+
+
+IpAddress.calc.IpAddressCalc <|-- IpAddress.calc.BroadcastIpAddressCalc
+IpAddress.calc.IpAddressCalc <|-- IpAddress.calc.NetworkIpAddressCalc
+
+IpAddress.calc.IpAddressCalcFactory -- IpAddress.calc.IpAddressCalc
+IpAddress.calc.BroadcastIpAddressCalc o-- IpAddress.Kind
+IpAddress.calc.NetworkIpAddressCalc o-- IpAddress.Kind
+
+IpAddress.Cidr o-- IpAddress.PrefixInOctet
+
+IpAddress.calc.CalcAddresses o-- IpAddress.IpAddress
+IpAddress.Cidr o-- IpAddress.IpAddress
+
+Main.Main <-- IpAddress.calc.CalcAddresses
+IpAddress.calc.CalcAddresses <-- IpAddress.Cidr
+IpAddress.calc.CalcAddresses <-- IpAddress.calc.IpAddressCalcFactory
+@enduml
