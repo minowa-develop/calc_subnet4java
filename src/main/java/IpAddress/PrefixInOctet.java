@@ -2,7 +2,7 @@ package IpAddress;
 
 public class PrefixInOctet {
     // fields
-    private  int prefixful;
+    private int prefixful;
     private int prefix;
     private int index;
 
@@ -14,7 +14,6 @@ public class PrefixInOctet {
     }
 
     // getter
-
     public int getPrefixful() {
         return prefixful;
     }

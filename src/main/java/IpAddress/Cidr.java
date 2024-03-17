@@ -16,7 +16,6 @@ public class Cidr {
     public IpAddress getIpaddress() {
         return ipaddress;
     }
-
     public PrefixInOctet getPrefix() {
         return prefixInOctet;
     }

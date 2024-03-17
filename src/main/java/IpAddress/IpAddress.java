@@ -12,6 +12,11 @@ public class IpAddress {
             octets.add(Integer.parseInt(octetStr));
         }
     }
+
+    /**
+     * cloneMethod用
+     * @param octets
+     */
     public IpAddress(List<Integer> octets){
         this.octets = new ArrayList<>();
         for(int octetStr : octets){
@@ -26,6 +31,11 @@ public class IpAddress {
         return octets.get(octetIndex);
     }
 
+    /**
+     * octetsのindex番号以降の値をvalueにセットする
+     * @param index
+     * @param value
+     */
     public void setRightAll(int index, int value){
         for(int i=index;i<4;i++){
             octets.set(i,value);
@@ -33,6 +43,10 @@ public class IpAddress {
     }
 
     @Override
+    /**
+     * IPアドレス形式に整形
+     * IPアドレス形式に整形
+     */
     public String toString(){
         StringBuilder tmp = new StringBuilder();
         boolean isFirstOctet = true;
